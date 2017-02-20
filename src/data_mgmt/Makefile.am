@@ -32,7 +32,8 @@ noinst_HEADERS =	data_common.h \
 			data_init.h \
 			data_object.h \
 			data_passwd.h \
-			data_protect.h
+			data_protect.h \
+			openssl_compat.h
 
 #
 # Common build flags

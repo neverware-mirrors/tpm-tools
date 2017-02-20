@@ -39,6 +39,7 @@
 #include <openssl/evp.h>
 #include <openssl/err.h>
 
+#include "openssl_compat.h"
 
 /*
  * Global variables
@@ -691,8 +692,11 @@ createRsaPubKeyObject( RSA               *a_pRsa,
 
 	int  rc = -1;
 
-	int  nLen = BN_num_bytes( a_pRsa->n );
-	int  eLen = BN_num_bytes( a_pRsa->e );
+	const BIGNUM *rsa_n, *rsa_e;
+	RSA_get0_key( a_pRsa, &rsa_n, &rsa_e, NULL );
+
+	int  nLen = BN_num_bytes( rsa_n );
+	int  eLen = BN_num_bytes( rsa_e );
 
 	CK_RV  rv;
 
@@ -732,8 +736,8 @@ createRsaPubKeyObject( RSA               *a_pRsa,
 	}
 
 	// Get binary representations of the RSA key information
-	BN_bn2bin( a_pRsa->n, n );
-	BN_bn2bin( a_pRsa->e, e );
+	BN_bn2bin( rsa_n, n );
+	BN_bn2bin( rsa_e, e );
 
 	// Create the RSA public key object
 	rv = createObject( a_hSession, tAttr, ulAttrCount, a_hObject );
@@ -760,14 +764,22 @@ createRsaPrivKeyObject( RSA               *a_pRsa,
 
 	int  rc = -1;
 
-	int  nLen = BN_num_bytes( a_pRsa->n );
-	int  eLen = BN_num_bytes( a_pRsa->e );
-	int  dLen = BN_num_bytes( a_pRsa->d );
-	int  pLen = BN_num_bytes( a_pRsa->p );
-	int  qLen = BN_num_bytes( a_pRsa->q );
-	int  dmp1Len = BN_num_bytes( a_pRsa->dmp1 );
-	int  dmq1Len = BN_num_bytes( a_pRsa->dmq1 );
-	int  iqmpLen = BN_num_bytes( a_pRsa->iqmp );
+	const BIGNUM *rsa_n, *rsa_e, *rsa_d;
+	const BIGNUM *rsa_p, *rsa_q;
+	const BIGNUM *rsa_dmp1, *rsa_dmq1, *rsa_iqmp;
+
+	RSA_get0_key( a_pRsa, &rsa_n, &rsa_e, &rsa_d );
+	RSA_get0_factors( a_pRsa, &rsa_p, &rsa_q );
+	RSA_get0_crt_params( a_pRsa, &rsa_dmp1, &rsa_dmq1, &rsa_iqmp );
+
+	int  nLen = BN_num_bytes( rsa_n );
+	int  eLen = BN_num_bytes( rsa_e );
+	int  dLen = BN_num_bytes( rsa_d );
+	int  pLen = BN_num_bytes( rsa_p );
+	int  qLen = BN_num_bytes( rsa_q );
+	int  dmp1Len = BN_num_bytes( rsa_dmp1 );
+	int  dmq1Len = BN_num_bytes( rsa_dmq1 );
+	int  iqmpLen = BN_num_bytes( rsa_iqmp );
 
 	CK_RV  rv;
 
@@ -821,14 +833,14 @@ createRsaPrivKeyObject( RSA               *a_pRsa,
 	}
 
 	// Get binary representations of the RSA key information
-	BN_bn2bin( a_pRsa->n, n );
-	BN_bn2bin( a_pRsa->e, e );
-	BN_bn2bin( a_pRsa->d, d );
-	BN_bn2bin( a_pRsa->p, p );
-	BN_bn2bin( a_pRsa->q, q );
-	BN_bn2bin( a_pRsa->dmp1, dmp1 );
-	BN_bn2bin( a_pRsa->dmq1, dmq1 );
-	BN_bn2bin( a_pRsa->iqmp, iqmp );
+	BN_bn2bin( rsa_n, n );
+	BN_bn2bin( rsa_e, e );
+	BN_bn2bin( rsa_d, d );
+	BN_bn2bin( rsa_p, p );
+	BN_bn2bin( rsa_q, q );
+	BN_bn2bin( rsa_dmp1, dmp1 );
+	BN_bn2bin( rsa_dmq1, dmq1 );
+	BN_bn2bin( rsa_iqmp, iqmp );
 
 	// Create the RSA private key object
 	rv = createObject( a_hSession, tAttr, ulAttrCount, a_hObject );
