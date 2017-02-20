@@ -372,7 +372,7 @@ readX509Cert( const char  *a_pszFile,
 		goto out;
 	}
 
-	if ( EVP_PKEY_type( pKey->type ) != EVP_PKEY_RSA ) {
+	if ( EVP_PKEY_base_id( pKey ) != EVP_PKEY_RSA ) {
 		logError( TOKEN_RSA_KEY_ERROR );
 
 		X509_free( pX509 );
