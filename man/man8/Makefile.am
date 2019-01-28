@@ -36,6 +36,7 @@ man8_MANS =	tpm_changeownerauth.8	\
 		tpm_createek.8		\
 		tpm_getpubek.8		\
 		tpm_restrictpubek.8	\
+		tpm_restrictsrk.8	\
 		tpm_selftest.8		\
 		tpm_setactive.8		\
 		tpm_setclearable.8	\

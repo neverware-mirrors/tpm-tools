@@ -161,8 +161,8 @@ using \s-1TSS\s0 popup boxes
 .IP "\fB\-y, \-\-owner\-well\-known\fR" 4
 .IX Item "-y, --owner-well-known"
 Use a secret of all zeros (20 bytes of zeros) as the owner's secret.
-.IP "\fB\-z, \-\-area\-well\-known\fR" 4
-.IX Item "-z, --area-well-known"
+.IP "\fB\-z, \-\-data\-well\-known\fR" 4
+.IX Item "-z, --data-well-known"
 Use a secret of all zeros (20 bytes of zeros) as the \s-1NVRAM\s0 area's secret.
 .IP "\fB\-o, \-\-pwdo\fR (optional parameter)" 4
 .IX Item "-o, --pwdo (optional parameter)"
@@ -189,6 +189,15 @@ To select the \s-1NVRAM\s0 area with index 0x100, the command line parameter sho
 .IX Item "-s, --size"
 The size of the \s-1NVRAM\s0 area.
 The parameter must either be a decimal number or a hexadecimal number starting with '0x'.
+.IP "\fB\-r, \-\-rpcsr\fR" 4
+.IX Item "-r, --rpcrs"
+PCRs to seal the NVRAM area to for reading (use multiple times)
+.IP "\fB\-w, \-\-wpcrs\fR" 4
+.IX Item "-w, --wpcrs"
+PCRs to seal the NVRAM area to for writing (use multiple times)
+.IP "\fB\-f, \-\-filename\fR" 4
+.IX Item "-f, --filename"
+File containing PCR info for the NVRAM area.
 .IP "\fB\-p, \-\-permissions\fR" 4
 .IX Item "-p, --permissions"
 The access permissions associated with the \s-1NVRAM\s0 area.

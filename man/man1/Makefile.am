@@ -22,6 +22,7 @@
 #
 
 man1_MANS	=	tpm_sealdata.1		\
+			tpm_unsealdata.1	\
 			tpm_version.1
 if P11_SUPPORT
 man1_MANS	+=	tpmtoken_init.1		\
