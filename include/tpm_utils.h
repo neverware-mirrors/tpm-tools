@@ -71,7 +71,7 @@
 #define __no_optimize
 #endif
 
-void * __no_optimize __memset(void *s, int c, size_t n);
+void * __memset(void *s, int c, size_t n);
 
 typedef int (*CmdOptParser)( const int aOpt, const char *aOptArg );
 typedef void (*CmdHelpFunction)( const char *aCmd );

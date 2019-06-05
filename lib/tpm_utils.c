@@ -134,10 +134,12 @@ genericOptHandler( int a_iNumArgs, char **a_pszArgs,
 	return 0;
 }
 
-void * __no_optimize
+void *
 __memset(void *s, int c, size_t n)
 {
-	return memset(s, c, n);
+	memset(s, c, n);
+	asm volatile("" ::: "memory");
+	return s;
 }
 
 /*
