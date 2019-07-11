@@ -193,8 +193,8 @@ parseNVPermsFile(FILE *f, TSS_HCONTEXT *hContext, TSS_HNVSTORE *nvObject,
 			goto out;
 		}
 
-		if (pcr > 15) {
-			logError(_("Cannot seal NVRAM area to PCR > 15\n"));
+		if (pcr > 23) {
+			logError(_("Cannot seal NVRAM area to PCR > 23\n"));
 			goto out;
 		}
 
@@ -387,8 +387,8 @@ int main(int argc, char **argv)
 		UINT32 i;
 
 		for (i = 0; i < selectedPcrsReadLen; i++) {
-			if (selectedPcrsRead[i] > 15) {
-				logError(_("Cannot seal NVRAM area to PCR > 15\n"));
+			if (selectedPcrsRead[i] > 23) {
+				logError(_("Cannot seal NVRAM area to PCR > 23\n"));
 				goto out_close;
 			}
 		}
@@ -415,8 +415,8 @@ int main(int argc, char **argv)
 		UINT32 i;
 
 		for (i = 0; i < selectedPcrsWriteLen; i++) {
-			if (selectedPcrsWrite[i] > 15) {
-				logError(_("Cannot seal NVRAM area to PCR > 15\n"));
+			if (selectedPcrsWrite[i] > 23) {
+				logError(_("Cannot seal NVRAM area to PCR > 23\n"));
 				goto out_close;
 			}
 		}
